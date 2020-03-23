@@ -1,0 +1,20 @@
+{
+  "name": "spanish-API-covid19",
+  "version": "1.0.0",
+  "description": "> Serving data from Datadista as a [JSON API](https://spanish-api-covid19.pedelriomarron.now.sh/)",
+  "main": "index.js",
+  "dependencies": {
+    "@zeit/fetch-retry": "^5.0.0",
+    "isomorphic-unfetch": "^3.0.0",
+    "moment": "^2.24.0"
+  },
+  "devDependencies": {
+    "@now/node": "^1.5.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
