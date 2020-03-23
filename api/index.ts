@@ -26,6 +26,6 @@ export default async (_, response: NowResponse) => {
             "pattern": `${config.domain}/api/regions/[region]`,
             "example": `${config.domain}/api/regions/01`
         },
-        source: "****",
+        source: "https://github.com/pedelriomarron/spanish-api-covid19",
     });
 };
