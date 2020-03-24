@@ -93,11 +93,13 @@ export function getFactors(value, yesterdayValue) {
 export function addToDates(obj, formatDate = 'YYYY-MM-DD') {
     for (let prop in obj) {
         let current = obj[prop]
-        current['dates'] = {}
+        let array = []
+        current['dates'] = array
         Object.entries(current).forEach(([key, value]) => {
             if (moment(key, formatDate, true).isValid()) {
-                current["dates"][key] = value
                 delete current[key]
+                let date = { date: key, value: value }
+                array.push(date)
             }
         });
     }
