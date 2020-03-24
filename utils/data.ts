@@ -14,7 +14,8 @@ const fetch = withRetry(unfetch);
  */
 export const fetchFeatures = async (url: string) => {
     const endpoint = `${url}`;
-    const response = await fetch(endpoint);
+    const headers = {};
+    const response = await fetch(endpoint, { headers });
 
     //const { features } = await response.json();
     const data = await response.text();
