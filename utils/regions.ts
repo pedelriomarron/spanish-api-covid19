@@ -1,4 +1,6 @@
-export const regions = {
+
+
+export const regionsData = {
     "01": "Andalucía",
     "02": "Aragón",
     "03": "Asturias",
@@ -18,6 +20,16 @@ export const regions = {
     "15": "Navarra",
     "16": "País Vasco",
     "17": "La Rioja",
+}
+
+
+const convertRegionToExport = (regions) => {
+    let res = []
+    Object.entries(regions).forEach(([key, value]) => {
+        let region = { code: key, name: value }
+        res.push(region)
+    });
+    return res
 }
 
 
@@ -43,3 +55,6 @@ export const regionsAlternative = {
     "País Vasco": "16",
     "La Rioja": "17",
 }
+
+
+export const regions = convertRegionToExport(regionsData)
