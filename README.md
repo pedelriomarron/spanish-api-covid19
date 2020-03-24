@@ -1,3 +1,8 @@
+<p align="center">
+  <img width="500" src="https://raw.githubusercontent.com/pedelriomarron/spanish-api-covid19/master/config/preview.png" />
+</p>
+
+
 # spanish-api-covid19
 
 > Serving data from Datadista as a [JSON API](https://spanish-api-covid19.pedelriomarron.now.sh/)
