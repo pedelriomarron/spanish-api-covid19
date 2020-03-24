@@ -1,14 +1,24 @@
 import { config } from './config';
 import { fetchFeatures } from "./data";
-import moment from 'moment';
+import { getObjByCode, getIndexValue, getFactors, sortByLastValue, addFactorToObject, addToDates } from './utils';
 
-
-export const getLastTotalValue = async (code, endpoints, details = '') => {
+/**
+ *
+ * Preguntara al endpoint y cogerá los datos ultimos que existan de un codigo concreto
+ *
+ * @param   {string} code - Codigo por el que se filtrarán los valores
+ * @param   {string} endpoints - Endpoint donde están los datos
+ * @param   {string} details - campos adiccional con informacion
+ * 
+ * @return  {Object} Objeto final
+ *
+ */
+export const getLastTotalValue = async (code: string, endpoints: string, details: string = '') => {
     let data = await fetchFeatures(
         endpoints
     )
     let total = getObjByCode(data, code)
-    let value = getLastValue(total)
+    let value = getIndexValue(total, -1)
     let yesterdayValue = getIndexValue(total, -2)
     let { factor, estimateTomorrow } = getFactors(value, yesterdayValue)
     details = `${config.domain}/api${details}`
@@ -16,75 +26,31 @@ export const getLastTotalValue = async (code, endpoints, details = '') => {
     return { value, factor, estimateTomorrow, details }
 };
 
-export const getAllTotalValue = async (endpoints, code = "") => {
-    let data = await fetchFeatures(
-        endpoints
-    )
-
+/**
+ *
+ * Preguntara al endpoint y cogerá todos los datos de un codigo concreto
+ *
+ * 
+ * @param   {string} endpoints - Endpoint donde están los datos
+ * @param   {string} code - Codigo por el que se filtrarán los valores
+ * 
+ * @return  {Object} Objeto final
+ *
+ */
+export const getAllTotalValue = async (endpoints, code = "") => {//TODO: cambiar el orden de los argunmentos para guardar integridad con la anterior funcion
+    let data = await fetchFeatures(endpoints)
     let dataOk;
-
     if (code !== "") {
         let total = getObjByCode(data, code)
         dataOk = { total }
-
     } else {
         dataOk = data
-        dataOk.sort(function (a, b) {
-            let valuea: any = getLastValue(a)
-            let valueb: any = getLastValue(b)
-
-            return valueb - valuea;
-        });
+        sortByLastValue(dataOk)
     }
-
-    for (var prop in dataOk) {
-        let total = dataOk[prop]
-        let value = getLastValue(total)
-        let yesterdayValue = getIndexValue(total, -2)
-        let { factor, estimateTomorrow } = getFactors(value, yesterdayValue)
-        total["factor"] = factor
-        total['estimateTomorrow'] = estimateTomorrow
-    }
+    addFactorToObject(dataOk)
     addToDates(dataOk)
-
     return dataOk
 };
 
 
-
-function getObjByCode(data, code) {
-    let director = data.find(stats => stats['cod_ine'] === code);
-    return director ? director : undefined;
-}
-
-
-function getLastValue(obj) {
-    var keys = Object.values(obj);
-    return keys.slice(-1)[0];
-}
-function getIndexValue(obj, n) {
-    var keys = Object.values(obj);
-    return keys.slice(n)[0];
-}
-
-function getFactors(value, yesterdayValue) {
-
-    let factor = value / yesterdayValue;
-    let estimateTomorrow = Math.round(value * factor);
-    return { factor, estimateTomorrow }
-}
-
-function addToDates(data) {
-
-    for (let prop in data) {
-        let total = data[prop]
-        total['dates'] = {}
-        Object.entries(total).forEach(([key, value]) => {
-            if (moment(key, 'DD/MM/YYYY', true).isValid()) {
-                total["dates"][key] = value
-                delete total[key]
-            }
-        });
-    }
-}
 
