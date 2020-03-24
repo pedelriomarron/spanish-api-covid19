@@ -3,8 +3,16 @@ import withRetry from "@zeit/fetch-retry";
 
 const fetch = withRetry(unfetch);
 
-
-export const fetchFeatures = async (url) => {
+/**
+ *
+ * Fetch a los endpoint
+ *
+ * @param   {string} url - url a la que hacer el fetch, estos datos se parsearan a objetc pues llegan en plano
+ * 
+ * @return  {Object} Response del Fetch
+ *
+ */
+export const fetchFeatures = async (url: string) => {
     const endpoint = `${url}`;
     const response = await fetch(endpoint);
 
@@ -14,7 +22,16 @@ export const fetchFeatures = async (url) => {
 };
 
 
-function csvJSON(csv) {
+/**
+ *
+ * Convierte un csv a un JSON
+ *
+ * @param   {string} csv - CSV plano
+ * 
+ * @return  {Object} JSON del csv
+ *
+ */
+function csvJSON(csv: string) {
     var lines = csv.split("\n");
     var result = [];
     var headers = lines[0].split(",");
@@ -29,7 +46,15 @@ function csvJSON(csv) {
     return result;
 }
 
-
-function replace(stringToReplace: any) {
+/**
+ *
+ * Pequeño Helper para borrar string raro que se sencuenta en el csv
+ *
+ * @param   {string} stringToReplace - String
+ * 
+ * @return  {string} String sano
+ *
+ */
+function replace(stringToReplace: string) {
     return stringToReplace.replace('﻿', '');
 }
