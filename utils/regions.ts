@@ -20,5 +20,26 @@ export const regions = {
     "17": "La Rioja",
 }
 
-//Andalucia : "01", Aragon :"02"	, Asturias : "03", Baleares :"04",Canarias:"05",Cantabria:"06",   Castilla_y_Leon	:"07",Castilla_La_Mancha : "08",
-//Catalunya: "09", C_Valenciana : "10", Extremadura:"11", Galicia:"12", Madrid:"13"  , Murcia: "14"
+
+
+export const regionsAlternative = {
+    "Andalucía": "01",
+    "Aragón": "02",
+    "Asturias": "03",
+    "Baleares": "04",
+    "Canarias": "05",
+    "Cantabria": "06",
+    "Castilla-La Mancha": "08",
+    "Castilla y León": "07",
+    "Cataluña": "09",
+    "Ceuta": "18",
+    "C. Valenciana": "10",
+    "Extremadura": "11",
+    "Galicia": "12",
+    "Madrid": "13",
+    "Melilla": "19",
+    "Murcia": "14",
+    "Navarra": "15",
+    "País Vasco": "16",
+    "La Rioja": "17",
+}

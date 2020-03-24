@@ -90,12 +90,12 @@ export function getFactors(value, yesterdayValue) {
  * 
  *
  */
-export function addToDates(obj) {
+export function addToDates(obj, formatDate = 'YYYY-MM-DD') {
     for (let prop in obj) {
         let current = obj[prop]
         current['dates'] = {}
         Object.entries(current).forEach(([key, value]) => {
-            if (moment(key, 'DD/MM/YYYY', true).isValid()) {
+            if (moment(key, formatDate, true).isValid()) {
                 current["dates"][key] = value
                 delete current[key]
             }
