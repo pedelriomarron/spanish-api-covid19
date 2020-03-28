@@ -35,6 +35,10 @@
 
 - /api/regions/[region]/uci: a [region] cases per region sorted by UCI patients
 
+## Showcase
+
+- [Representación de los efectos del COVID-19 en España](https://github.com/alvcuevas/covid19), (Web) by [alvcuevas](https://covid19-three.now.sh/)
+
 
 ## License
 
