@@ -77,6 +77,7 @@ export function getIndexValue(obj, n: number) {
  */
 export function getFactors(value, yesterdayValue) {
     let factor, estimateTomorrow
+
     if (value == undefined || value == null || value == 0 || yesterdayValue == undefined || yesterdayValue == null || yesterdayValue == 0) {
         factor = 0;
         yesterdayValue = 0;
@@ -84,7 +85,6 @@ export function getFactors(value, yesterdayValue) {
         factor = value / yesterdayValue;
         estimateTomorrow = Math.round(value * factor);
     }
-
 
     return { factor, estimateTomorrow }
 }
