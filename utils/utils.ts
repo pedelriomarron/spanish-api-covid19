@@ -47,7 +47,7 @@ export function addFactorToObject(obj) {
  */
 export function getObjByCode(obj, code: string, key: string = 'cod_ine') {
     let findObj = obj.find(stats => stats[key] === code);
-    return findObj ? findObj : undefined;
+    return findObj ? findObj : false;
 }
 
 
